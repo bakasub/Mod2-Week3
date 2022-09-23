@@ -52,7 +52,8 @@ function addProduct() {
         mainMenu()
     }
     //type
-    let menu = `1.Heavy type \n 2.Fragile type`
+    let menuType = `1.Heavy type \n 2.Fragile type\n`
+    console.log(menuType)
     let type = input.question(`Input type of product \n`)
     if (type != 1 && type != 2) {
         console.log(`Invalid data`)
@@ -71,9 +72,11 @@ function addProduct() {
         mainMenu()
     }
     let description = input.question(`Input product description\n`)
-    let createDate = input.question(`Input date\n`)
+    //time
+    let time = new Date();
+    let today = `${time.getDate()}/${time.getMonth() + 1}`;
     //Product
-    let product = new Product(code, name, type, price, quantity, createDate, description)
+    let product = new Product(code, name, type, price, quantity, today, description)
     listProduct.addProduct(product)
 }
 
