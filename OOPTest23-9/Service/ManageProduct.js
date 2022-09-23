@@ -32,8 +32,6 @@ var ManageProductX = /** @class */ (function () {
     ManageProductX.prototype.addProduct = function (product) {
         this.listProduct.push(product);
     };
-    ManageProductX.prototype.editProduct = function () {
-    };
     ManageProductX.prototype.removeProduct = function (code) {
         var itemCount = this.listProduct.length;
         for (var i = 0; i < this.listProduct.length; i++) {
@@ -44,6 +42,13 @@ var ManageProductX = /** @class */ (function () {
         }
         if (itemCount == this.listProduct.length) {
             "The input code doesnt exist";
+        }
+    };
+    ManageProductX.prototype.findByCode = function (code) {
+        for (var i = 0; i < this.listProduct.length; i++) {
+            if (code == this.listProduct[i]) {
+                return i;
+            }
         }
     };
     return ManageProductX;

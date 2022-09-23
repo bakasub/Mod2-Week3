@@ -16,7 +16,7 @@ function mainMenu() {
     let choice;
     console.log(menu)
     do {
-        choice = input.question(`Choose an action`)
+        choice = input.question(`Choose an action\n`)
         switch (choice) {
             case '1' :
                 listProduct.displayFiveTimes()
@@ -44,7 +44,7 @@ function display() {
 }
 
 function addProduct() {
-    let code = (this.listProduct.length + 1)
+    let code = (listProduct.listProduct.length + 1)
     //name
     let name = input.question(`Input product name \n`)
     if (name == null) {

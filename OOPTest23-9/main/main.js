@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+var Product_1 = require("../Model/Product");
 var ManageProduct_1 = require("../Service/ManageProduct");
 var input = require('readline-sync');
 var listProduct = new ManageProduct_1.ManageProductX();
@@ -8,7 +9,7 @@ function mainMenu() {
     var choice;
     console.log(menu);
     do {
-        choice = input.question("Choose an action");
+        choice = input.question("Choose an action\n");
         switch (choice) {
             case '1':
                 listProduct.displayFiveTimes();
@@ -20,6 +21,7 @@ function mainMenu() {
                 addProduct();
                 break;
             case '4':
+                updateProduct();
                 break;
             case '5':
                 removeProduct();
@@ -32,17 +34,52 @@ function display() {
     listProduct.filterByName(name);
 }
 function addProduct() {
-    var name = input.question("Input product name");
+    console.log(listProduct.listProduct.length);
+    var code = input.question("Input code\n");
+    //name
+    var name = input.question("Input product name \n");
     if (name == null) {
         console.log("Invalid data");
         mainMenu();
     }
+    //type
     var menu = "1.Heavy type \n 2.Fragile type";
-    var type = input.question("Input type of product");
+    var type = input.question("Input type of product \n");
     if (type != 1 && type != 2) {
         console.log("Invalid data");
         mainMenu();
     }
+    //price
+    var price = input.question("Input price\n");
+    if (price < 0) {
+        console.log("Invalid data");
+        mainMenu();
+    }
+    //quantity
+    var quantity = input.question("Input quantity\n");
+    if (quantity < 0) {
+        console.log("Invalid data\n");
+        mainMenu();
+    }
+    var description = input.question("Input product description\n");
+    var createDate = input.question("Input date\n");
+    //Product
+    var product = new Product_1.Product(code, name, type, price, quantity, createDate, description);
+    listProduct.addProduct(product);
+}
+function updateProduct() {
+    var code = input.question("Input product code\n");
+    if (code < 0 || code > this.listProduct.length) {
+        console.log("Product doesnt exist");
+    }
+    var name = input.question("Input product name \n");
+    var type = input.question("Input type\n");
+    var price = input.question("Input price \n");
+    var quantity = input.question("Input quantity\n");
+    var createDate = input.question("Input create date");
+    var description = input.question("Input product description");
+    var editedProduct = new Product_1.Product(code, name, type, price, quantity, createDate, description);
+    listProduct[this.listProduct.findByCode(code)] = editedProduct;
 }
 function removeProduct() {
     var code = input.question("Input code to remove product");
